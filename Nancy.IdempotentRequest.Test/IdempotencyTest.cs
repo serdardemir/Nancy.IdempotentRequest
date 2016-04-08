@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Shouldly;
+using Nancy.Testing;
 
 namespace Nancy.IdempotentRequest.Test
 {
@@ -44,6 +46,38 @@ namespace Nancy.IdempotentRequest.Test
 
             Assert.NotEqual(message.Id, message2.Id);
 
+        }
+
+        [Fact]
+        public void  Should_Throw_ForDuplicate_Request()
+        {
+
+            IApiClient client = new ApiClient("http://localhost:57918/");
+
+            var request = new DummyMessage() { Body = "some body", Tag = "Some Tag", Title = "Some title" };
+
+
+            DummyMessage message = client.Post<DummyMessage>(request);
+            
+
+            Should.Throw<IdempotencyException>(() =>
+            {
+                client.Post<DummyMessage>(request);
+            });
+            
+        }
+
+        [Fact]
+        public void Same_IdempotencyKey_ShouldReturn_SameResult()
+        {
+            var bootstrapper = new DefaultNancyBootstrapper();
+            var browser = new Browser(bootstrapper);
+
+            // When
+            var result = browser.Get("/", with =>
+            {
+                with.HttpRequest();
+            });
         }
     }
 }
