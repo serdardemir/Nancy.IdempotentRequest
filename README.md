@@ -15,10 +15,7 @@ protected override void ApplicationStartup(TinyIoCContainer container, IPipeline
 }
 
 public Response CheckCache(NancyContext context)
-
-
 public void SetCache(NancyContext context)
-
 
 //Generating Entity Tag
 var etag = EntityFilterHelper.GenerateETag(context.Request.Body);
