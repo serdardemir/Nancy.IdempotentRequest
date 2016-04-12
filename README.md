@@ -1,24 +1,28 @@
 # NancyFx Idempotent Request Sample
 
-  Generates HTTP  [ETag]( https://en.wikipedia.org/wiki/HTTP_ETag)   unique key for prevent duplicate request to any POST,PUT request 
-
- 
- ```csharp
- 
-//with idempotency key should not create additional entity
-var idempotencyKey = Guid.NewGuid().ToString();
-RequestOptions.Instance.SetIdempotencyKey(idempotencyKey);
-
-DummyMessage message = client.Post<DummyMessage>(request);
-DummyMessage message2 = client.Post<DummyMessage>(request);
+Generates HTTP  [ETag]( https://en.wikipedia.org/wiki/HTTP_ETag)   unique key for prevent duplicate request to any POST,PUT request 
 
 
-//without idempotency key should  create additional entity
-RequestOptions.Instance.SetIdempotencyKey(string.Empty);
+```csharp
 
-DummyMessage message = client.Post<DummyMessage>(request);
-DummyMessage message2 = client.Post<DummyMessage>(request);
- 
- ```
+protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+{
+	base.ApplicationStartup(container, pipelines);
+
+	pipelines.BeforeRequest += CheckCache;
+
+	pipelines.AfterRequest += SetCache;
+}
+
+public Response CheckCache(NancyContext context)
+
+
+public void SetCache(NancyContext context)
+
+
+//Generating Entity Tag
+var etag = EntityFilterHelper.GenerateETag(context.Request.Body);
+
+```
 
 
