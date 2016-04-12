@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Nancy.IdempotentRequest
+namespace Nancy.IdempotentRequest.Helper
 {
     public static class EntityFilterHelper
     {
