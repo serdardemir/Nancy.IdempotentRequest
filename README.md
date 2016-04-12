@@ -1,6 +1,7 @@
 # NancyFx Idempotent Request Sample
 
- Attach a unique key to any POST,PUT request made to the API via the Idempotency-Key: <key> header.
+  Generates HTTP  [ETag]( https://en.wikipedia.org/wiki/HTTP_ETag)   unique key for prevent duplicate request to any POST,PUT request 
+
  
  ```csharp
  
