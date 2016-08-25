@@ -1,5 +1,7 @@
 # NancyFx Idempotent Request Sample
 
+[![Build status](https://ci.appveyor.com/api/projects/status/iwspcowhfy458nqr?svg=true)](https://ci.appveyor.com/project/serdardemir/nancy-idempotentrequest)
+
 Generates HTTP  [ETag]( https://en.wikipedia.org/wiki/HTTP_ETag)   unique key for prevent duplicate request to any POST,PUT request 
 
 
