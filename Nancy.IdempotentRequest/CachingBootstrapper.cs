@@ -1,11 +1,9 @@
-﻿using Nancy.Bootstrapper;
-using Nancy.IdempotentRequest.Extensions;
-using Nancy.TinyIoc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Nancy.Bootstrapper;
+using Nancy.IdempotentRequest.Extensions;
+using Nancy.TinyIoc;
 
 namespace Nancy.IdempotentRequest
 {

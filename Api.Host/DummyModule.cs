@@ -37,18 +37,5 @@ namespace Api.Host
                 };
             }
         }
-
-        public class Blog
-        {
-            public int blogId { get; set; }
-
-            public string title { get; set; }
-
-            public string body { get; set; }
-
-            public string tag { get; set; }
-
-            public DateTime addedDate { get; set; }
-        }
     }
 }

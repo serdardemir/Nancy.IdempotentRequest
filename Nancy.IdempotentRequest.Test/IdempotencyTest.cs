@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using Shouldly;
 using Nancy.Testing;
+using Shouldly;
+using Xunit;
 
 namespace Nancy.IdempotentRequest.Test
 {
@@ -21,14 +18,11 @@ namespace Nancy.IdempotentRequest.Test
 
             IDummyApiClient client = new DummyApiClient();
 
-            var request = new DummyMessage() { Body = "some body", Tag = "Some Tag", Title = "Some title",  };
-            
+            var request = new DummyMessage() { Body = "some body", Tag = "Some Tag", Title = "Some title", };
 
             client.Post(request);
             DummyMessage message2 = client.Post<DummyMessage>(request);
-
-           // Assert.Equal(message.Id, message2.Id);
-
+            // Assert.Equal(message.Id, message2.Id);
         }
 
         [Fact]
@@ -39,33 +33,27 @@ namespace Nancy.IdempotentRequest.Test
             IDummyApiClient client = new DummyApiClient();
 
             var request = new DummyMessage() { Body = "some body", Tag = "Some Tag", Title = "Some title" };
-
             
             DummyMessage message = client.Post<DummyMessage>(request);
 
             DummyMessage message2 = client.Post<DummyMessage>(request);
 
             Assert.NotEqual(message.Id, message2.Id);
-
         }
 
         [Fact]
-        public void  Should_Throw_ForDuplicate_Request()
+        public void Should_Throw_ForDuplicate_Request()
         {
-
             IDummyApiClient client = new DummyApiClient();
 
             var request = new DummyMessage() { Body = "some body", Tag = "Some Tag", Title = "Some title" };
 
-
             DummyMessage message = client.Post<DummyMessage>(request);
-            
 
             Should.Throw<IdempotencyException>(() =>
             {
                 client.Post<DummyMessage>(request);
             });
-            
         }
 
         [Fact]
@@ -80,7 +68,5 @@ namespace Nancy.IdempotentRequest.Test
                 with.HttpRequest();
             });
         }
-
-       
     }
 }

@@ -1,14 +1,12 @@
-﻿using RestSharp;
-using System;
+﻿using System;
 using System.Linq;
+using RestSharp;
 
 namespace Nancy.IdempotentRequest.Test
 {
     public class DummyApiClient : IDummyApiClient
     {
         public string ApiAddress = "http://localhost/Api.Host.Nancy/api/createLog";
-
-
 
         public T Post<T>(T message)
         {
@@ -19,12 +17,11 @@ namespace Nancy.IdempotentRequest.Test
         {
             RestRequest request;
             var client = PrepareRestClientWithRequestBody(message, out request);
-            var response = client.Post(request);
+            client.Post(request);
         }
 
         private RestClient PrepareRestClientWithRequestBody(object requestBody, out RestRequest request)
         {
-
             var client = new RestClient(ApiAddress);
 
             request = new RestRequest { RequestFormat = DataFormat.Json };            

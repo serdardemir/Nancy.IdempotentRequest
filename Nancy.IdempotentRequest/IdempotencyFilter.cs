@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using Nancy.IdempotentRequest.Helper;
 
 namespace Nancy.IdempotentRequest
@@ -21,7 +16,6 @@ namespace Nancy.IdempotentRequest
         {
             var responseHeaders = context.Response.Headers;
             var requestHeaders = context.Request.Headers;
-
 
             var etag = EntityFilterHelper.GenerateETag(context.Request.Body);
             responseHeaders.Add("ETag", etag);
@@ -46,6 +40,5 @@ namespace Nancy.IdempotentRequest
                 }
             }
         }
-
     }
 }
